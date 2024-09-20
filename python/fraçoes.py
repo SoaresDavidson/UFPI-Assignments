@@ -18,6 +18,7 @@ def minMax(num, den):
 
 def div(f1, f2):
     return f1.getNum() / f1.getDen(), f2.getNum() / f2.getDen()
+
 class Fracao():
     def __init__(self, num, den):
         self.__num = num
