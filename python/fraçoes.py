@@ -19,7 +19,7 @@ def minMax(num, den):
 def div(f1, f2):
     return f1.getNum() / f1.getDen(), f2.getNum() / f2.getDen()
 
-class Fracao():
+class Fraction():
     def __init__(self, num, den):
         self.__num = num
         self.__den = den
@@ -48,7 +48,7 @@ class Fracao():
 
         mdc = euclides(max, min)
 
-        return Fracao(num//mdc, den//mdc)
+        return Fraction(num//mdc, den//mdc)
 
     def __sub__(self, f2):
         #set f2 num to the opposite sign
@@ -58,13 +58,13 @@ class Fracao():
         #after the sub Num goes back to its original sign
         f2.setNum(-(f2.getNum()))
 
-        if num == 0: return Fracao(0,den)
+        if num == 0: return Fraction(0,den)
 
         min,max = minMax(num, den)
 
         mdc = euclides(max, min)
 
-        return Fracao(num//mdc, den//mdc)
+        return Fraction(num//mdc, den//mdc)
     
     def __mul__(self, f2):
         den = self.getDen() * f2.getDen()
@@ -75,7 +75,7 @@ class Fracao():
 
         mdc = euclides(max, min)
 
-        return Fracao(num//mdc, den//mdc)
+        return Fraction(num//mdc, den//mdc)
     
     def __truediv__(self, f2):
         den = self.getDen() * f2.getNum()
@@ -86,7 +86,7 @@ class Fracao():
 
         mdc = euclides(max, min)
 
-        return Fracao(num//mdc, den//mdc)
+        return Fraction(num//mdc, den//mdc)
     #      >
     def __gt__(self, f2):
         n1,n2 = div(self,f2)
@@ -120,8 +120,8 @@ def euclides(max, min):
     return euclides(min, n)
 
 
-f1 = Fracao(1, 2)
-f2 = Fracao(1, 2)
+f1 = Fraction(1, 2)
+f2 = Fraction(1, 2)
 f3 = f1 + f2
 f4 = f1 - f2
 f5 = f1 * f2
@@ -129,3 +129,8 @@ f6 = f1 / f2
 
 print(f3,f4,f5,f6)
 print(f1!=f2)
+print(f1==f2)
+print(f1>=f2)
+print(f1>f2)
+print(f1<=f2)
+print(f1<f2)

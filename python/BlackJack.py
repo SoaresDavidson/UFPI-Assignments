@@ -34,9 +34,13 @@ class card():
     def getNum(self):
         return self.__num
     
-class baralho():
+class deck():
     __pilhaCarta = []
+
     def __init__(self):
+        pass
+
+    def randomDeck(self):
         num = []
         for i in range(52):
             num.append(i)
@@ -45,7 +49,6 @@ class baralho():
             carta = random.choice(num)
             self.addPilha(carta)
             num.remove(carta)
-
 
     def addPilha(self, num):
         cardNum = num % 13 
@@ -63,18 +66,31 @@ class baralho():
 def sumHand(cards:list):
     sumHand = 0
     for i in cards:
-        if i.getNum() == 0: continue
-        sumHand += i.getNum() + 1
+        cardValue = i.getNum() + 1
+        if cardValue == 1: continue
+        if cardValue > 10:
+            cardValue = 10
+        sumHand += cardValue
 
     for i in cards:
-        if i.getNum() != 0: continue
-
+        cardValue = i.getNum() + 1
+        if cardValue != 1: continue
         if sumHand <= 10: sumHand += 11
         else: sumHand += 1
 
     return sumHand
+
+def showHand(hand: card):
+    print("sua mão: ",end="")
+
+    for i in hand:
+        print(i,end=",")
+
+    print(end="\n\n")
+
 while True:
-    pilha = baralho()
+    pilha = deck()
+    pilha.randomDeck()
 
     cardHide = pilha.getCartaPilha()
     cardShow = pilha.getCartaPilha()
@@ -90,40 +106,35 @@ while True:
         clear() 
         print(f"Mão da casa: {cardShow} , ???", end="\n\n")
 
-        print("sua mão: ",end="")
+        showHand(cardPlayer)
 
-        for i in cardPlayer:
-            print(i,end=",")
-
-        print(end="\n\n")
-
-        if input("pressione 1 para comprar: ") == "1":
+        if input("pressione 1 para comprar e qualquer outro para ficar com as cartas que está: ") == "1":
             cardPlayer.append(pilha.getCartaPilha())
-            sumPlayer += cardPlayer[-1].getNum() +1
+            lastCard = cardPlayer[-1].getNum() + 1
+            sumPlayer += lastCard if lastCard <= 10 else 10
         else:
             break
         clear()
         if sumPlayer >= 21: break
-        
+    clear()
+
     sumPlayer = sumHand(cardPlayer)
     sumDealer = sumHand(cardDealer)
 
     print(f"Mão da casa: {cardShow} , {cardHide}", end="\n\n")
 
-    print("sua mão: ",end="")
+    showHand(cardPlayer)
 
-    for i in cardPlayer:
-        print(i,end=",")
-
-    print("\n\n")
-
-    print(sumDealer,sumPlayer)
+    print(f"soma da mão da casa:{sumDealer}\nsoma da sua mão:{sumPlayer}",end = "\n\n")
 
     if sumPlayer > sumDealer and sumPlayer <= 21:
         print("Você venceu!!!")
     else:
-        print("Você perdeu :( ")
+        if sumDealer > 21: 
+            print("Empate :/")
+        else:
+            print("Você perdeu :( ")
 
-    if input("Quer tentar denovo?(0 para cancelar): ") == "0":
+    if input("Quer tentar denovo?Aperte qualquer botão(0 para cancelar): ") == "0":
         break
     clear()
