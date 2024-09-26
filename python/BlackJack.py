@@ -96,7 +96,7 @@ while True:
     cardShow = pilha.getCartaPilha()
 
     cardPlayer = [pilha.getCartaPilha()]
-    sumPlayer = cardPlayer[0].getNum() +1
+    sumPlayer = cardPlayer[0].getNum() + 1 if cardPlayer[0].getNum() + 1 <= 10 else 10 
 
     cardDealer = [cardHide, cardShow]
     sumDealer = cardHide.getNum() + cardShow.getNum() + 2
@@ -111,7 +111,9 @@ while True:
         if input("pressione 1 para comprar e qualquer outro para ficar com as cartas que está: ") == "1":
             cardPlayer.append(pilha.getCartaPilha())
             lastCard = cardPlayer[-1].getNum() + 1
-            sumPlayer += lastCard if lastCard <= 10 else 10
+            cu = lastCard if lastCard <= 10 else 10
+            print(cu)
+            sumPlayer += cu
         else:
             break
         clear()
