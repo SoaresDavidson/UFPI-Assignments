@@ -1,4 +1,4 @@
-import random,os
+import random,os,sys
 def clear():
     os.system("cls" if os.name == "nt" else "clear");
 
@@ -103,12 +103,17 @@ while True:
 
    
     while True:
-        clear() 
+        #clear() 
         print(f"Mão da casa: {cardShow} , ???", end="\n\n")
-
+        i = 1
         showHand(cardPlayer)
+        if len(sys.argv) > 1:
+            user_choice = sys.argv[i]
+            i+=1
+        else:
+            user_choice = input("pressione 1 para comprar e qualquer outro para ficar com as cartas que está: ") == "1"
 
-        if input("pressione 1 para comprar e qualquer outro para ficar com as cartas que está: ") == "1":
+        if user_choice:
             cardPlayer.append(pilha.getCartaPilha())
             lastCard = cardPlayer[-1].getNum() + 1
             cu = lastCard if lastCard <= 10 else 10
