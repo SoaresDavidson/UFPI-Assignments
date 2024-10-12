@@ -121,11 +121,11 @@ def menu(action):
     if action == 6:
         listaDados = list()
         with open("dados.json","w") as arquivo:
-            for object in cadastros:
-                dados = {"nome" : object.nome, 
-                         "cpf" : object.cpf,
-                         "telefone" : object.telefone,
-                         "endereco" : object.endereco}
+            for objeto in cadastros:
+                dados = {"nome" : objeto.nome, 
+                         "cpf" : objeto.cpf,
+                         "telefone" : objeto.telefone,
+                         "endereco" : objeto.endereco}
                 listaDados.append(dados)    
             json.dump(listaDados, arquivo, indent=2)
             #arquivo.write(json.dump(listaDados))
