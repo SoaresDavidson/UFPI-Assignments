@@ -1,0 +1,27 @@
+[
+  {
+    "nome": "jesse james",
+    "cpf": "4",
+    "telefone": [
+      "87"
+    ],
+    "endereco": "rua tal"
+  },
+  {
+    "nome": "gio",
+    "cpf": "6",
+    "telefone": [
+      "0"
+    ],
+    "endereco": "rua t"
+  },
+  {
+    "nome": "Davi Sousa Soares",
+    "cpf": "063.456.443-90",
+    "telefone": [
+      "86 99865-7023",
+      "86 99950-3243"
+    ],
+    "endereco": "rua tal de tal"
+  }
+]

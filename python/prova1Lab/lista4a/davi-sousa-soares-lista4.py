@@ -1,4 +1,4 @@
-import os
+import os,json
 def clear():
     os.system("cls" if os.name == "nt" else "clear");
 
@@ -15,14 +15,15 @@ class Pessoa():
 #le o arquvio(caso não exista cria um) e manipula a string por linha para preencher a classe Pessoa
 def le_arquivo():
     try:
-        arquivo = open("dados","r")
-        for i in arquivo.readlines(): 
-            if i == "\n": continue
-            dados = i.split("/")#dentro do arquivo os dados são separados por "/"
-            resgistrar(dados[0], dados[1], dados[2], dados[3])#nome,cpf,lista de telefones e endereço respectivamante
-        arquivo.close()
+        with open("dados.json", "r") as arquivo: jsonDados = json.load(arquivo)
+        for dados in jsonDados: resgistrar(dados["nome"], dados["cpf"], dados["telefone"], dados["endereco"])
+        #####antes de aplicar json
+        #for i in arquivo.readlines(): 
+            #if i == "\n": continue
+            #dados = i.split("/")#dentro do arquivo os dados são separados por "/"
+            #resgistrar(dados[0], dados[1], dados[2], dados[3])#nome,cpf,lista de telefones e endereço respectivamante
     except FileNotFoundError:
-        arquivo = open("dados","w")
+        arquivo = open("dados.json","w")
         arquivo.close()
  
 #pergunta alguma informação da pessoa e retorna o valor
@@ -116,15 +117,24 @@ def menu(action):
     
     if action == 5:
         remove_cpf()
-        
+
     if action == 6:
-        with open("dados","w") as arquivo:
-            for i in cadastros:
-                nome = i.nome
-                cpf = i.cpf
-                telefone = i.telefone
-                endereco = i.endereco
-                arquivo.write(f"{nome}/{cpf}/{telefone}/{endereco}\n")
+        listaDados = list()
+        with open("dados.json","w") as arquivo:
+            for object in cadastros:
+                dados = {"nome" : object.nome, 
+                         "cpf" : object.cpf,
+                         "telefone" : object.telefone,
+                         "endereco" : object.endereco}
+                listaDados.append(dados)    
+            json.dump(listaDados, arquivo, indent=2)
+            #arquivo.write(json.dump(listaDados))
+                #####antes de aplicar json
+                #nome = i.nome
+                #cpf = i.cpf
+                #telefone = i.telefone
+                #endereco = i.endereco
+                #arquivo.write(f"{nome}/{cpf}/{telefone}/{endereco}\n")
         exit()
 
     print()

@@ -6,22 +6,27 @@ def clear():
 #pergunta alguma informação da pessoa
 def query(info:str):
     return input(f"digite o {info} da pessoa: ")
+
+def registraTelefone():
+    telefones = []
+    for i in range(int(input("Quantos telefones deseja registrar?: "))):
+        telefones.append(query("telefone"))
+    return telefones
 #mostra todos os atributos da pessoa
 def mostrar(key):
-    return f"nome = {cadastros[key][0]},cpf = {key}, telefone = {cadastros[key][1]}, endereco = {cadastros[key][2]}"
+    return f"nome = {cadastros[key][0]},cpf = {key}, telefones = {cadastros[key][1]}, endereco = {cadastros[key][2]}"
 #realiza o registro
-def resgistrar():
+def registrar():
     nome = query("nome")
     cpf = query("CPF")
-    telefone = query("telefone")
+    telefones = registraTelefone()
     endereco = query("endereço")
 
     if busca_cpf(cpf) != None:
         print("CPF já cadastrado!")
         return
     
-    cadastros[cpf] = (nome,telefone,endereco)
-    telefones.append(telefone)
+    cadastros[cpf] = (nome,telefones,endereco)
     print(f"{nome} cadastrado com sucesso")
 
 #checa se o cpf ja está presente no dicionario
@@ -46,7 +51,7 @@ def realiza_busca_cpf():
 #checa se o telefone existe nos valores do dicionario
 def busca_telefone():
     telefone = query("telefone")
-
+    
     for i in cadastros:
         if cadastros[i][1] == telefone:
             return i
@@ -72,7 +77,6 @@ def remove_cpf():
         return
     
     print("Cadastro apagado com sucesso!")
-    telefones.remove(cadastros[result][1])
     del cadastros[result]
 
 #funcção do menu
@@ -80,7 +84,7 @@ def menu(action):
     clear()
     
     if action == 1:
-        resgistrar()
+        registrar()
 
     if action == 2:
         for i,v in enumerate(cadastros):
@@ -101,7 +105,6 @@ def menu(action):
     print()
 
 cadastros = {}
-telefones = []
 
 while True:
     print("1 - inserir pessoa\n2 - listar pessoas cadastradas\n3 - buscar pessoa por CPF\n4 - buscar pessoa por telefone\n5 - remover pessoa por CPF\n6 - sair")
