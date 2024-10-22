@@ -120,7 +120,7 @@ def euclides(max, min):
     return euclides(min, n)
 
 
-f1 = Fraction(1, 2)
+f1 = Fraction(1, 0)
 f2 = Fraction(1, 2)
 f3 = f1 + f2
 f4 = f1 - f2
