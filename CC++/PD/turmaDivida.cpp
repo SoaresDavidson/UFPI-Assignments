@@ -34,6 +34,6 @@ int main(){
         int key; cin >> key;
         root = insert(root, key);
  }
-    
+    cout << root->right;
 
 }
