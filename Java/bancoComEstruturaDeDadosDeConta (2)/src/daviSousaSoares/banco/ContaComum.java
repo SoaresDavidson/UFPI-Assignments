@@ -10,11 +10,11 @@ public class ContaComum extends Conta {
 		
 	boolean debito(double val, String senha) {
 		if (val > 0) {
-			if (dono.getSenha() == senha) {
-			  if (val <= saldo) {
-			    saldo = saldo - val;
-			    extrato = extrato + "Debito: " + val + ". Saldo: " + saldo + "\n";
-                return true;
+			if (dono.getSenha().equals(senha)) {
+				if (val <= saldo) {
+				    saldo = saldo - val;
+				    extrato = extrato + "Debito: " + val + ". Saldo: " + saldo + "\n";
+	                return true;
 			  }
 			}
 		}

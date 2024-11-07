@@ -1,4 +1,4 @@
-package daviSousaSoares.estoqueComProdutoPerecivel;
+package daviSousaSoares;
 import java.util.Date;
 
 public class Lote {
@@ -16,7 +16,7 @@ public class Lote {
 
 	public void setQuant(int quant) {
 		this.quant = quant;
-	}//cu
+	}
 
 	public Date getValidade() {
 		return validade;

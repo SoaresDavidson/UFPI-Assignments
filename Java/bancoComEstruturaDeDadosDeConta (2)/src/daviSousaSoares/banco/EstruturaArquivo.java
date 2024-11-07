@@ -20,9 +20,9 @@ public class EstruturaArquivo extends EstruturaDeDadosDeContas {
             meuArquivoR = new File("Contas.json");
             if (!meuArquivoR.exists()) {
                 meuArquivoR.createNewFile();
-                try (FileWriter writer = new FileWriter(meuArquivoR)) {
-                    writer.write("[]");
-                    writer.flush();
+                try (FileWriter meuArquivoW = new FileWriter(meuArquivoR)) {
+                    meuArquivoW.write("[]");
+                    meuArquivoW.flush();
                 }
             }
         } catch (IOException e) {

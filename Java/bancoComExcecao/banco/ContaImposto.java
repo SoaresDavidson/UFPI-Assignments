@@ -1,4 +1,4 @@
-package daviSousaSoares.banco;
+package pedroSantosNeto.banco;
 
 public class ContaImposto extends Conta {
 	
@@ -9,20 +9,18 @@ public class ContaImposto extends Conta {
 		imposto = i;
 	}
 	
-	boolean debito(double val, String senha) {
+	void debito(double val, String senha) throws SaldoInsuficienteException, SenhaIncorretaException {
 		if (val > 0) {
-			if (dono.getSenha().equals(senha)) {
+			if (dono.getSenha() == senha) {
 			  if (val + saldo * imposto <= saldo) {
 			    saldo = saldo - (val + saldo * imposto);
 			    extrato = extrato + "Debito: " + (val + + saldo * imposto) + ". Saldo: " + saldo + "\n";
-                return true;
+			  } else {
+				  throw new SaldoInsuficienteException(numero, saldo);
 			  }
+			} else {
+				throw new SenhaIncorretaException(numero);
 			}
 		}
-		return false;
-	}
-	
-	public double getImposto() {
-		return this.imposto;
 	}
 }

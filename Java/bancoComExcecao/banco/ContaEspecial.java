@@ -1,4 +1,4 @@
-package daviSousaSoares.banco;
+package pedroSantosNeto.banco;
 
 public class ContaEspecial extends ContaComum {
 	
@@ -9,21 +9,18 @@ public class ContaEspecial extends ContaComum {
 		limite = l;
 	}
 	
-	boolean debito(double val, String senha) {
+	void debito(double val, String senha) throws SaldoInsuficienteException, SenhaIncorretaException {
 		if (val > 0) {
-			if (dono.getSenha().equals(senha)) {
+			if (dono.getSenha() == senha) {
 			  if (val <= saldo + limite) {
 			    saldo = saldo - val;
 			    extrato = extrato + "Debito: " + val + ". Saldo: " + saldo + "\n";
-                return true;
+			  } else {
+				  throw new SaldoInsuficienteException(numero, saldo);
 			  }
+			} else {
+				throw new SenhaIncorretaException(numero);
 			}
 		}
-		return false;
 	}
-	
-	public double getLimite() {
-		return this.limite;
-	}
-
 }

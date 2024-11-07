@@ -81,9 +81,12 @@ public class Banco {
 		if (c1 != null && c2 != null) {
 			if (c1.debito(val, senha)) {
 			  c2.credito(val);
-			  
+			  if (contas instanceof EstruturaArquivo) {
+				  ((EstruturaArquivo) contas).update(c1);
+				  ((EstruturaArquivo) contas).update(c2);
+			  }
+			  }
 			}
 		}
-	}
 	
 }
